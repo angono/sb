@@ -1,392 +1,519 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Songo Beafrika — Nouveau (interactive + a11y)</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Songo Beafrika - Innovation Publicitaire</title>
   <script src="https://cdn.tailwindcss.com"></script>
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'deep-purple': '#1a0b2e',
+            'electric-blue': '#00f5ff',
+            'hot-pink': '#ff2d75',
+            'vibrant-yellow': '#ffde59',
+            'dark-teal': '#0f3460'
+          },
+          fontFamily: {
+            'montserrat': ['Montserrat', 'sans-serif'],
+            'playfair': ['Playfair Display', 'serif'],
+          },
+          animation: {
+            'float': 'float 6s ease-in-out infinite',
+            'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-10px)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
   <style>
-    /* Small helpers + animations (used by classes added by JS) */
-    :root { --anim-duration: 520ms; --anim-ease: cubic-bezier(.16,.84,.36,1); }
-
-    /* skip link visible on focus */
-    .skip-link { position: absolute; left: -999px; top: auto; width: 1px; height: 1px; overflow: hidden; }
-    .skip-link:focus { left: 1rem; top: 1rem; width: auto; height: auto; padding: .5rem .75rem; background: white; border-radius: .375rem; box-shadow: 0 6px 18px rgba(2,6,23,.08); z-index: 60; }
-
-    /* fade-up animation */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(10px); }
-      to   { opacity: 1; transform: translateY(0); }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      overflow-x: hidden;
     }
-    .reveal { opacity: 0; transform: translateY(10px); will-change: opacity, transform; }
-    .reveal.is-visible { animation: fadeUp var(--anim-duration) var(--anim-ease) both; }
-
-    /* image reveal */
-    .img-reveal { opacity: 0; transform: scale(1.03); transition: opacity 420ms var(--anim-ease), transform 420ms var(--anim-ease); }
-    .img-reveal.loaded { opacity: 1; transform: scale(1); }
-
-    /* subtle hover scale for interactive cards */
-    .card-hover { transition: transform 240ms var(--anim-ease), box-shadow 240ms var(--anim-ease); }
-    .card-hover:focus-within, .card-hover:hover { transform: translateY(-6px); box-shadow: 0 18px 30px rgba(2,6,23,0.08); }
-
-    /* accessible reduced motion */
-    @media (prefers-reduced-motion: reduce) {
-      :root { --anim-duration: 0ms; }
-      .reveal, .img-reveal, .card-hover { transition: none !important; animation: none !important; transform: none !important; opacity: 1 !important; }
+    
+    .hero-bg {
+      background: linear-gradient(rgba(26, 11, 46, 0.85), rgba(15, 52, 96, 0.9)), 
+                  url('https://images.unsplash.com/photo-1557804483-ef2a13c9c9b9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
     }
-
-    /* small utility for focus-visible fallback */
-    .focus-ring:focus { outline: none; box-shadow: 0 0 0 4px rgba(99,102,241,0.12); border-radius: .5rem; }
+    
+    .shape-divider {
+      height: 150px;
+      overflow: hidden;
+      transform: rotate(180deg);
+    }
+    
+    .shape-divider svg {
+      height: 100%;
+      width: 100%;
+    }
+    
+    .shape-divider .shape-fill {
+      fill: #1a0b2e;
+    }
+    
+    .floating-card {
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    .card-1 {
+      animation-delay: 0s;
+    }
+    
+    .card-2 {
+      animation-delay: 2s;
+    }
+    
+    .card-3 {
+      animation-delay: 4s;
+    }
+    
+    .gradient-text {
+      background: linear-gradient(90deg, #ff2d75, #00f5ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .feature-card {
+      transition: all 0.4s ease;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0, 245, 255, 0.2);
+      border-color: #00f5ff;
+    }
+    
+    .ad-type-card {
+      transition: all 0.3s ease;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .ad-type-card:hover {
+      transform: translateY(-5px);
+      border-color: #ff2d75;
+      box-shadow: 0 10px 20px rgba(255, 45, 117, 0.2);
+    }
+    
+    .listing-card {
+      transition: all 0.3s ease;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .listing-card:hover {
+      transform: translateY(-5px);
+      border-color: #ffde59;
+      box-shadow: 0 10px 20px rgba(255, 222, 89, 0.2);
+    }
+    
+    .glow {
+      box-shadow: 0 0 20px rgba(0, 245, 255, 0.5);
+    }
+    
+    .pink-glow {
+      box-shadow: 0 0 20px rgba(255, 45, 117, 0.5);
+    }
+    
+    .cta-section {
+      background: linear-gradient(135deg, #1a0b2e 0%, #0f3460 50%, #1a0b2e 100%);
+    }
+    
+    @media (max-width: 768px) {
+      .hero-bg {
+        background-attachment: scroll;
+      }
+    }
   </style>
 </head>
-<body class="antialiased bg-slate-50 text-slate-900">
+<body class="bg-deep-purple text-white">
 
-  <!-- SKIP LINK -->
-  <a class="skip-link" href="#main-content">Aller au contenu</a>
+  <!-- Hero Section with Background Image -->
+  <section class="hero-bg min-h-screen flex flex-col justify-center relative overflow-hidden">
+    <!-- Animated background elements -->
+    <div class="absolute top-10 left-10 w-20 h-20 rounded-full bg-electric-blue opacity-20 animate-pulse-slow"></div>
+    <div class="absolute top-1/3 right-20 w-16 h-16 rounded-full bg-hot-pink opacity-30 animate-pulse-slow" style="animation-delay: 1s;"></div>
+    <div class="absolute bottom-20 left-1/4 w-24 h-24 rounded-full bg-vibrant-yellow opacity-20 animate-pulse-slow" style="animation-delay: 2s;"></div>
+    
+    <div class="container mx-auto px-4 py-16 relative z-10">
+      <div class="max-w-4xl mx-auto text-center">
+        <div class="inline-flex items-center bg-black/30 backdrop-blur-md rounded-full px-6 py-3 mb-8 border border-electric-blue/30 glow">
+          <span class="text-vibrant-yellow mr-2 text-xl">✨</span>
+          <span class="font-medium">Plateforme de Promotion N°1 en Centrafrique</span>
+        </div>
+        
+        <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight font-playfair">
+          <span class="block">SONGO</span>
+          <span class="block gradient-text">BEAFRIKA</span>
+        </h1>
+        
+        <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl mx-auto">
+          Révolutionnez votre présence digitale avec des solutions publicitaires innovantes.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row justify-center gap-6 mt-12">
+          <button class="bg-electric-blue text-deep-purple font-bold px-8 py-4 rounded-full hover:bg-white transition-all duration-300 transform hover:scale-105 glow flex items-center justify-center">
+            <span>Lancer Votre Campagne</span>
+            <i class="fas fa-rocket ml-3"></i>
+          </button>
+          <button class="bg-transparent border-2 border-hot-pink text-white font-bold px-8 py-4 rounded-full hover:bg-hot-pink transition-all duration-300 transform hover:scale-105 pink-glow flex items-center justify-center">
+            <span>Explorer les Possibilités</span>
+            <i class="fas fa-arrow-right ml-3"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Floating cards -->
+    <div class="absolute bottom-10 left-10 floating-card card-1 hidden md:block">
+      <div class="bg-white/10 backdrop-blur-md p-4 rounded-xl border border-electric-blue/30 w-48">
+        <div class="flex items-center mb-2">
+          <div class="w-8 h-8 bg-electric-blue rounded-full flex items-center justify-center mr-2">
+            <i class="fas fa-chart-line text-deep-purple text-sm"></i>
+          </div>
+          <span class="font-bold">+250%</span>
+        </div>
+        <p class="text-xs">Augmentation moyenne de visibilité</p>
+      </div>
+    </div>
+    
+    <div class="absolute top-20 right-10 floating-card card-2 hidden md:block">
+      <div class="bg-white/10 backdrop-blur-md p-4 rounded-xl border border-hot-pink/30 w-48">
+        <div class="flex items-center mb-2">
+          <div class="w-8 h-8 bg-hot-pink rounded-full flex items-center justify-center mr-2">
+            <i class="fas fa-users text-white text-sm"></i>
+          </div>
+          <span class="font-bold">10K+</span>
+        </div>
+        <p class="text-xs">Entreprises nous font confiance</p>
+      </div>
+    </div>
+    
+    <div class="absolute top-1/2 left-1/4 floating-card card-3 hidden lg:block">
+      <div class="bg-white/10 backdrop-blur-md p-4 rounded-xl border border-vibrant-yellow/30 w-48">
+        <div class="flex items-center mb-2">
+          <div class="w-8 h-8 bg-vibrant-yellow rounded-full flex items-center justify-center mr-2">
+            <i class="fas fa-globe-africa text-deep-purple text-sm"></i>
+          </div>
+          <span class="font-bold">98%</span>
+        </div>
+        <p class="text-xs">Couverture nationale</p>
+      </div>
+    </div>
+  </section>
 
-  <!-- fixed nav (role + accessible labels) -->
-  <nav role="navigation" aria-label="Navigation principale" class="fixed inset-x-0 top-0 z-50 bg-white/75 backdrop-blur-md border-b border-slate-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="h-16 flex items-center justify-between">
-        <div class="flex items-center gap-3">
-          <div class="w-11 h-11 rounded-xl bg-blue-500 shadow-md flex items-center justify-center text-white font-bold">SB</div>
-          <div class="hidden sm:block">
-            <div class="text-sm font-semibold">Songo Beafrika</div>
-            <div class="text-xs text-slate-400 -mt-0.5">Promotion & Publicité</div>
+  <!-- Shape Divider -->
+  <div class="shape-divider">
+    <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+      <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" class="shape-fill"></path>
+      <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" class="shape-fill"></path>
+      <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" class="shape-fill"></path>
+    </svg>
+  </div>
+
+  <!-- Pourquoi Section -->
+  <section class="py-20 bg-deep-purple">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold mb-6 font-playfair">
+          Pourquoi <span class="gradient-text">Songo Beafrika</span> ?
+        </h2>
+        <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+          Une approche révolutionnaire de la publicité qui transforme votre visibilité en résultats tangibles.
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div class="feature-card rounded-2xl p-8 text-center">
+          <div class="w-20 h-20 bg-gradient-to-br from-electric-blue to-dark-teal rounded-full flex items-center justify-center mb-6 mx-auto glow">
+            <i class="fas fa-bullseye text-3xl text-white"></i>
+          </div>
+          <h3 class="font-bold text-2xl mb-4 text-electric-blue">Précision Maximale</h3>
+          <p class="text-gray-300">Notre technologie d'IA cible votre audience idéale avec une précision chirurgicale, éliminant le gaspillage publicitaire.</p>
+        </div>
+        
+        <div class="feature-card rounded-2xl p-8 text-center">
+          <div class="w-20 h-20 bg-gradient-to-br from-hot-pink to-deep-purple rounded-full flex items-center justify-center mb-6 mx-auto pink-glow">
+            <i class="fas fa-chart-line text-3xl text-white"></i>
+          </div>
+          <h3 class="font-bold text-2xl mb-4 text-hot-pink">Croissance Exponentielle</h3>
+          <p class="text-gray-300">Débloquez des taux de conversion records avec nos stratégies publicitaires multi-canaux optimisées.</p>
+        </div>
+        
+        <div class="feature-card rounded-2xl p-8 text-center">
+          <div class="w-20 h-20 bg-gradient-to-br from-vibrant-yellow to-hot-pink rounded-full flex items-center justify-center mb-6 mx-auto" style="box-shadow: 0 0 20px rgba(255, 222, 89, 0.5);">
+            <i class="fas fa-users text-3xl text-deep-purple"></i>
+          </div>
+          <h3 class="font-bold text-2xl mb-4 text-vibrant-yellow">Communauté Engagée</h3>
+          <p class="text-gray-300">Bénéficiez de l'effet réseau de notre plateforme qui connecte les entreprises aux consommateurs les plus pertinents.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Types de Publicités -->
+  <section class="py-20 bg-dark-teal">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold mb-6 font-playfair">
+          Formats <span class="text-vibrant-yellow">Créatifs</span>
+        </h2>
+        <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+          Découvrez nos solutions publicitaires innovantes conçues pour captiver votre audience.
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+        <div class="ad-type-card rounded-xl p-6 text-center">
+          <div class="w-16 h-16 bg-electric-blue/20 rounded-xl flex items-center justify-center mb-4 mx-auto border border-electric-blue/30">
+            <i class="fas fa-video text-electric-blue text-2xl"></i>
+          </div>
+          <h3 class="font-bold text-lg mb-2">Expériences Immersives</h3>
+          <p class="text-gray-400 text-sm mb-3">Publicités vidéo 360° et réalité augmentée</p>
+          <div class="text-electric-blue font-semibold">12 formats disponibles</div>
+        </div>
+        
+        <div class="ad-type-card rounded-xl p-6 text-center">
+          <div class="w-16 h-16 bg-hot-pink/20 rounded-xl flex items-center justify-center mb-4 mx-auto border border-hot-pink/30">
+            <i class="fas fa-podcast text-hot-pink text-2xl"></i>
+          </div>
+          <h3 class="font-bold text-lg mb-2">Audio Interactif</h3>
+          <p class="text-gray-400 text-sm mb-3">Spots audio avec déclencheurs vocaux</p>
+          <div class="text-hot-pink font-semibold">8 formats disponibles</div>
+        </div>
+        
+        <div class="ad-type-card rounded-xl p-6 text-center">
+          <div class="w-16 h-16 bg-vibrant-yellow/20 rounded-xl flex items-center justify-center mb-4 mx-auto border border-vibrant-yellow/30">
+            <i class="fas fa-mobile-alt text-vibrant-yellow text-2xl"></i>
+          </div>
+          <h3 class="font-bold text-lg mb-2">Mobile First</h3>
+          <p class="text-gray-400 text-sm mb-3">Publicités optimisées pour mobile</p>
+          <div class="text-vibrant-yellow font-semibold">15 formats disponibles</div>
+        </div>
+        
+        <div class="ad-type-card rounded-xl p-6 text-center">
+          <div class="w-16 h-16 bg-white/20 rounded-xl flex items-center justify-center mb-4 mx-auto border border-white/30">
+            <i class="fas fa-newspaper text-white text-2xl"></i>
+          </div>
+          <h3 class="font-bold text-lg mb-2">Contenu Narratif</h3>
+          <p class="text-gray-400 text-sm mb-3">Publi-reportages et brand storytelling</p>
+          <div class="text-white font-semibold">6 formats disponibles</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Listings -->
+  <section class="py-20 bg-deep-purple">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row justify-between items-center mb-12">
+        <div>
+          <h2 class="text-4xl md:text-5xl font-bold mb-2 font-playfair">
+            Campagnes <span class="text-hot-pink">Vedettes</span>
+          </h2>
+          <p class="text-xl text-gray-300">Découvrez des exemples de campagnes qui ont marqué les esprits</p>
+        </div>
+        <button class="mt-6 md:mt-0 bg-hot-pink text-white font-bold px-8 py-4 rounded-full hover:bg-pink-600 transition-all duration-300 transform hover:scale-105 pink-glow flex items-center">
+          <span>Voir toutes les campagnes</span>
+          <i class="fas fa-arrow-right ml-3"></i>
+        </button>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Listing 1 -->
+        <div class="listing-card rounded-xl overflow-hidden">
+          <div class="h-48 bg-gradient-to-r from-electric-blue to-dark-teal relative">
+            <div class="absolute top-4 right-4 bg-deep-purple text-electric-blue font-bold px-3 py-1 rounded-full text-sm border border-electric-blue">
+              Tendance
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 bg-electric-blue/20 rounded-full flex items-center justify-center text-electric-blue mr-3 border border-electric-blue/30">
+                <i class="fas fa-tshirt"></i>
+              </div>
+              <div>
+                <h3 class="font-bold text-lg">Mode Urbaine RCA</h3>
+                <p class="text-gray-400 text-sm">Bangui, Centrafrique</p>
+              </div>
+            </div>
+            <p class="text-gray-300 mb-4">Campagne de lancement d'une marque de vêtements locaux avec influenceurs digitaux.</p>
+            <div class="flex justify-between items-center">
+              <span class="text-electric-blue font-bold">+320% d'engagement</span>
+              <button class="text-hot-pink hover:text-pink-300 font-medium">
+                Voir étude de cas <i class="fas fa-chevron-right ml-1 text-xs"></i>
+              </button>
+            </div>
           </div>
         </div>
+        
+        <!-- Listing 2 -->
+        <div class="listing-card rounded-xl overflow-hidden">
+          <div class="h-48 bg-gradient-to-r from-hot-pink to-vibrant-yellow relative">
+            <div class="absolute top-4 right-4 bg-deep-purple text-hot-pink font-bold px-3 py-1 rounded-full text-sm border border-hot-pink">
+              Viral
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 bg-hot-pink/20 rounded-full flex items-center justify-center text-hot-pink mr-3 border border-hot-pink/30">
+                <i class="fas fa-utensils"></i>
+              </div>
+              <div>
+                <h3 class="font-bold text-lg">Saveurs Centrafricaines</h3>
+                <p class="text-gray-400 text-sm">Bimbo, Centrafrique</p>
+              </div>
+            </div>
+            <p class="text-gray-300 mb-4">Campagne digitale pour un restaurant traditionnel avec réalité augmentée.</p>
+            <div class="flex justify-between items-center">
+              <span class="text-hot-pink font-bold">+450% de réservations</span>
+              <button class="text-electric-blue hover:text-blue-300 font-medium">
+                Voir étude de cas <i class="fas fa-chevron-right ml-1 text-xs"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Listing 3 -->
+        <div class="listing-card rounded-xl overflow-hidden">
+          <div class="h-48 bg-gradient-to-r from-vibrant-yellow to-hot-pink relative">
+            <div class="absolute top-4 right-4 bg-deep-purple text-vibrant-yellow font-bold px-3 py-1 rounded-full text-sm border border-vibrant-yellow">
+              Innovation
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 bg-vibrant-yellow/20 rounded-full flex items-center justify-center text-vibrant-yellow mr-3 border border-vibrant-yellow/30">
+                <i class="fas fa-mobile-alt"></i>
+              </div>
+              <div>
+                <h3 class="font-bold text-lg">Tech Solutions RCA</h3>
+                <p class="text-gray-400 text-sm">Bangui, Centrafrique</p>
+              </div>
+            </div>
+            <p class="text-gray-300 mb-4">Lancement d'une application mobile avec campagne publicitaire interactive.</p>
+            <div class="flex justify-between items-center">
+              <span class="text-vibrant-yellow font-bold">+15K téléchargements</span>
+              <button class="text-hot-pink hover:text-pink-300 font-medium">
+                Voir étude de cas <i class="fas fa-chevron-right ml-1 text-xs"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        <div class="flex items-center gap-3">
-          <button id="mobileMenuBtn" class="sm:hidden p-2 rounded-md text-slate-700 hover:bg-slate-100 focus-ring" aria-expanded="false" aria-controls="mobileMenu" aria-label="Ouvrir le menu">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M4 12h16M4 17h16"/></svg>
-          </button>
+  <!-- CTA Section -->
+  <section class="cta-section py-20 relative overflow-hidden">
+    <!-- Background elements -->
+    <div class="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-electric-blue opacity-10"></div>
+    <div class="absolute -bottom-20 -left-20 w-64 h-64 rounded-full bg-hot-pink opacity-10"></div>
+    
+    <div class="container mx-auto px-4 text-center relative z-10">
+      <h2 class="text-4xl md:text-6xl font-bold mb-6 font-playfair">
+        Prêt à <span class="gradient-text">révolutionner</span> votre communication ?
+      </h2>
+      <p class="text-xl text-gray-300 max-w-2xl mx-auto mb-10">
+        Rejoignez l'élite des entreprises centrafricaines qui ont choisi l'innovation publicitaire.
+      </p>
+      <div class="flex flex-col sm:flex-row justify-center gap-6">
+        <button class="bg-electric-blue text-deep-purple font-bold px-8 py-4 rounded-full hover:bg-white transition-all duration-300 transform hover:scale-105 glow">
+          Démarrer Maintenant
+        </button>
+        <button class="bg-transparent border-2 border-vibrant-yellow text-white font-bold px-8 py-4 rounded-full hover:bg-vibrant-yellow hover:text-deep-purple transition-all duration-300 transform hover:scale-105">
+          <span>Planifier une Démo</span>
+          <i class="fas fa-calendar-alt ml-3"></i>
+        </button>
+      </div>
+    </div>
+  </section>
 
-          <div id="navLinks" class="hidden sm:flex items-center gap-6" role="menubar" aria-hidden="false">
-            <a role="menuitem" href="#" class="text-sm text-slate-700 hover:text-slate-900 focus-ring">Explorer</a>
-            <a role="menuitem" href="#" class="text-sm text-slate-700 hover:text-slate-900 focus-ring">Tarifs</a>
-            <a role="menuitem" href="#" class="text-sm text-slate-700 hover:text-slate-900 focus-ring">Aide</a>
-
-            <a role="button" href="#nouvelle" class="ml-2 inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 to-amber-400 text-white px-4 py-2 rounded-xl shadow hover:scale-105 transform transition focus-ring" aria-label="Publier une annonce">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16m8-8H4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              Publier
+  <!-- Footer -->
+  <footer class="bg-black py-12 border-t border-electric-blue/20">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div>
+          <h3 class="text-2xl font-bold mb-4 font-playfair gradient-text">Songo Beafrika</h3>
+          <p class="text-gray-400">La plateforme publicitaire la plus innovante de Centrafrique.</p>
+          <div class="flex space-x-4 mt-6">
+            <a href="#" class="w-10 h-10 bg-deep-purple rounded-full flex items-center justify-center text-electric-blue hover:bg-electric-blue hover:text-deep-purple transition">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="w-10 h-10 bg-deep-purple rounded-full flex items-center justify-center text-hot-pink hover:bg-hot-pink hover:text-white transition">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="w-10 h-10 bg-deep-purple rounded-full flex items-center justify-center text-electric-blue hover:bg-electric-blue hover:text-deep-purple transition">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="w-10 h-10 bg-deep-purple rounded-full flex items-center justify-center text-vibrant-yellow hover:bg-vibrant-yellow hover:text-deep-purple transition">
+              <i class="fab fa-linkedin-in"></i>
             </a>
           </div>
         </div>
+        
+        <div>
+          <h4 class="font-bold mb-4 text-electric-blue">Navigation</h4>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-gray-400 hover:text-electric-blue transition">Accueil</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-electric-blue transition">Solutions</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-electric-blue transition">Tarifs</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-electric-blue transition">Réalisations</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="font-bold mb-4 text-hot-pink">Ressources</h4>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-gray-400 hover:text-hot-pink transition">Blog</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-hot-pink transition">Études de cas</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-hot-pink transition">FAQ</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-hot-pink transition">Support</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="font-bold mb-4 text-vibrant-yellow">Contact</h4>
+          <ul class="space-y-2">
+            <li class="flex items-center text-gray-400">
+              <i class="fas fa-map-marker-alt mr-2 text-electric-blue"></i>
+              <span>Bangui, Centrafrique</span>
+            </li>
+            <li class="flex items-center text-gray-400">
+              <i class="fas fa-phone mr-2 text-hot-pink"></i>
+              <span>+236 XX XX XX XX</span>
+            </li>
+            <li class="flex items-center text-gray-400">
+              <i class="fas fa-envelope mr-2 text-vibrant-yellow"></i>
+              <span>innovation@songobeafrika.cf</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+        <p>&copy; 2023 Songo Beafrika. Tous droits réservés. | Conçu avec <i class="fas fa-heart text-hot-pink"></i> en Centrafrique</p>
       </div>
     </div>
+  </footer>
 
-    <!-- mobile popup menu -->
-    <div id="mobileMenu" class="sm:hidden hidden border-t border-slate-100" role="menu" aria-label="Menu mobile">
-      <div class="px-4 py-3 space-y-2">
-        <a class="block py-2 text-slate-700 rounded-md hover:bg-slate-50 focus-ring" role="menuitem" href="#">Explorer</a>
-        <a class="block py-2 text-slate-700 rounded-md hover:bg-slate-50 focus-ring" role="menuitem" href="#">Tarifs</a>
-        <a class="block py-2 text-slate-700 rounded-md hover:bg-slate-50 focus-ring" role="menuitem" href="#">Aide</a>
-        <a class="block py-2 text-white bg-gradient-to-r from-blue-500 to-amber-400 rounded-md text-center focus-ring" role="menuitem" href="#nouvelle">Publier</a>
-      </div>
-    </div>
-  </nav>
-
-  <main id="main-content" role="main" class="pt-20">
-
-    <!-- HERO -->
-    <header class="relative" aria-labelledby="hero-title">
-      <div class="h-[60vh] sm:h-[64vh] md:h-[72vh] lg:h-[78vh] w-full relative overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1487014679447-9f8336841d58?w=1600&q=60&auto=format&fit=crop" alt="Photo mettant en avant une vitrine locale" class="w-full h-full object-cover brightness-75" loading="lazy" />
-
-        <div class="absolute inset-0 bg-gradient-to-tr from-black/20 via-transparent to-amber-500/10 mix-blend-multiply" aria-hidden="true"></div>
-
-        <!-- hero content (reveals) -->
-        <div class="absolute inset-0 flex items-center">
-          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 w-full">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-              <!-- left -->
-              <div class="space-y-6 text-white reveal" data-reveal>
-                <div class="inline-flex items-center gap-2 bg-white/10 border border-white/10 rounded-full px-3 py-1 text-sm">
-                  <span class="text-lg" aria-hidden="true">🚀</span>
-                  <span>Boostez votre visibilité locale — simple et puissant</span>
-                </div>
-
-                <h1 id="hero-title" class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight drop-shadow">
-                  Faites briller votre activité.
-                  <span class="text-amber-300"> Vite.</span>
-                </h1>
-
-                <p class="max-w-xl text-slate-200/90">Créez une annonce attractive, ciblez votre audience et suivez les résultats — tout depuis un tableau de bord simple et efficace.</p>
-
-                <div class="flex flex-wrap gap-3">
-                  <a href="#nouvelle" class="inline-flex items-center gap-3 bg-gradient-to-r from-blue-400 to-amber-400 text-black font-semibold px-5 py-3 rounded-lg shadow transform transition hover:scale-105 focus-ring" role="button" aria-label="Créer une annonce">
-                    Créer une annonce
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                  </a>
-
-                  <a href="#catalog" class="inline-flex items-center gap-2 px-4 py-3 rounded-lg bg-black/20 text-white border border-white/10 backdrop-blur-sm hover:bg-black/25 transition focus-ring" role="link" aria-label="Voir les annonces">
-                    Voir les annonces
-                  </a>
-                </div>
-              </div>
-
-              <!-- right (glass preview) : only on large screens -->
-              <div class="hidden lg:flex justify-end reveal" data-reveal>
-                <div class="w-[380px] rounded-2xl bg-white/6 border border-white/10 backdrop-blur-lg p-4 shadow-2xl">
-                  <div class="rounded-xl overflow-hidden">
-                    <img data-src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=1200&q=60&auto=format&fit=crop" alt="Aperçu campagne" loading="lazy" class="w-full h-40 object-cover img-reveal" />
-                  </div>
-                  <div class="p-4">
-                    <div class="flex items-center justify-between">
-                      <div>
-                        <div class="text-xs text-amber-200">Campagne Vedette</div>
-                        <div class="font-semibold text-white">Artisanat — Collection d'été</div>
-                      </div>
-                      <div class="text-sm text-white/70" aria-hidden="true">👁️ 2.6k</div>
-                    </div>
-
-                    <p class="mt-3 text-sm text-white/80">Annonce mise en avant pour 7 jours — visibilité maximale dans la zone ciblée.</p>
-
-                    <div class="mt-4 flex items-center gap-3">
-                      <a class="text-sm inline-flex items-center gap-2 px-3 py-2 bg-white/10 rounded-md text-white border border-white/10 hover:bg-white/15 focus-ring" href="#edit">Modifier</a>
-                      <a class="text-sm inline-flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-blue-400 to-amber-400 text-black rounded-md font-semibold shadow focus-ring" href="#promote">Promouvoir</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-            </div> <!-- grid -->
-          </div>
-        </div>
-      </div>
-
-      <!-- SVG diagonal divider (reliable) -->
-      <div class="pointer-events-none" aria-hidden="true">
-        <svg viewBox="0 0 1440 60" class="w-full" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0,60 C360,0 1080,0 1440,60 L1440,60 L0,60 Z" fill="white"></path>
-        </svg>
-      </div>
-    </header>
-
-    <!-- WHY / FEATURES -->
-    <section class="py-12 lg:py-16 bg-white" aria-labelledby="why-title">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
-          <div>
-            <h2 id="why-title" class="text-2xl font-bold">Pourquoi Songo Beafrika ?</h2>
-            <p class="mt-3 text-slate-600">Ciblage local simple, formats puissants et outils de performance pour les petites entreprises.</p>
-
-            <div class="mt-6 flex gap-3 flex-wrap">
-              <a class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-50 text-slate-800 border focus-ring" href="#how">Découvrir</a>
-              <a class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-50 text-amber-700 border focus-ring" href="#pricing">Tarifs</a>
-            </div>
-          </div>
-
-          <div class="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div class="p-4 bg-gradient-to-br from-blue-50 to-white rounded-2xl border border-slate-100 shadow card-hover reveal" data-reveal>
-              <div class="text-3xl font-bold text-blue-600" aria-hidden="true">Ciblage</div>
-              <div class="mt-2 text-sm text-slate-600">Quartiers, intérêts et horaires pour toucher les bonnes personnes.</div>
-            </div>
-
-            <div class="p-4 bg-gradient-to-br from-amber-50 to-white rounded-2xl border border-slate-100 shadow card-hover reveal" data-reveal>
-              <div class="text-3xl font-bold text-amber-500" aria-hidden="true">Formats</div>
-              <div class="mt-2 text-sm text-slate-600">Vidéo, image, audio, publi-reportage — choix selon votre objectif.</div>
-            </div>
-
-            <div class="p-4 bg-white/60 rounded-2xl border border-slate-100 shadow card-hover reveal" data-reveal>
-              <div class="text-3xl font-bold text-slate-800" aria-hidden="true">Simplicité</div>
-              <div class="mt-2 text-sm text-slate-600">Créez, payez, suivez — tout en quelques clics.</div>
-            </div>
-
-            <div class="p-4 bg-white/60 rounded-2xl border border-slate-100 shadow card-hover reveal" data-reveal>
-              <div class="text-3xl font-bold text-slate-800" aria-hidden="true">Performances</div>
-              <div class="mt-2 text-sm text-slate-600">Tableau de bord clair et recommandations concrètes.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FEATURED CATALOG -->
-    <section id="catalog" class="py-12 lg:py-16" aria-labelledby="catalog-title">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between mb-6">
-          <div>
-            <h3 id="catalog-title" class="text-2xl font-bold">Annonces en vedette</h3>
-            <p class="text-sm text-slate-500">Sélection locale mise à jour par nos soins</p>
-          </div>
-          <a href="#catalog-all" class="text-sm font-semibold text-blue-600 focus-ring">Voir tout</a>
-        </div>
-
-        <div class="space-y-6 md:space-y-0 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-6">
-          <!-- Card 1 -->
-          <article class="break-inside-avoid bg-white rounded-2xl shadow-lg overflow-hidden card-hover reveal" data-reveal tabindex="0" aria-labelledby="card1-title">
-            <div class="relative">
-              <img data-src="https://images.unsplash.com/photo-1528825871115-3581a5387919?w=1000&q=60&auto=format&fit=crop" alt="Manioc transformé à l'export" loading="lazy" class="w-full h-56 object-cover img-reveal" />
-              <div class="absolute top-3 left-3 bg-amber-400 text-sm text-slate-900 px-3 py-1 rounded-full">Vedette</div>
-              <div class="absolute right-3 bottom-3 bg-black/70 text-white px-3 py-1 rounded-full text-xs">156</div>
-            </div>
-            <div class="p-4">
-              <div class="text-xs text-blue-600 inline-block border border-blue-100 px-2 py-1 rounded-full">Agriculture</div>
-              <h4 id="card1-title" class="mt-3 font-semibold">Manioc Transformé — Export</h4>
-              <p class="mt-2 text-sm text-slate-600">Farine de manioc, qualité export — livraison possible.</p>
-              <div class="mt-4 flex items-center justify-between">
-                <div class="text-xs text-slate-500">Bimbo, RCA</div>
-                <div class="text-xs bg-emerald-600 text-white px-2 py-1 rounded-full">Active</div>
-              </div>
-            </div>
-          </article>
-
-          <!-- Card 2 -->
-          <article class="break-inside-avoid bg-white rounded-2xl shadow-lg overflow-hidden card-hover reveal" data-reveal tabindex="0" aria-labelledby="card2-title">
-            <div class="relative">
-              <img data-src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=1000&q=60&auto=format&fit=crop" alt="École internationale de Bangui" loading="lazy" class="w-full h-44 object-cover img-reveal" />
-              <div class="absolute top-3 left-3 bg-white/90 text-xs px-2 py-1 rounded-lg border">Publi-reportage</div>
-              <div class="absolute right-3 bottom-3 bg-black/70 text-white px-3 py-1 rounded-full text-xs">98</div>
-            </div>
-            <div class="p-4">
-              <div class="text-xs text-indigo-600 inline-block border border-indigo-100 px-2 py-1 rounded-full">Éducation</div>
-              <h4 id="card2-title" class="mt-3 font-semibold">École Internationale de Bangui</h4>
-              <p class="mt-2 text-sm text-slate-600">Inscriptions ouvertes — programme bilingue disponible.</p>
-              <div class="mt-4 flex items-center justify-between">
-                <div class="text-xs text-slate-500">Bangui, RCA</div>
-                <div class="text-xs bg-emerald-600 text-white px-2 py-1 rounded-full">Active</div>
-              </div>
-            </div>
-          </article>
-
-          <!-- Card 3 -->
-          <article class="break-inside-avoid bg-white rounded-2xl shadow-lg overflow-hidden card-hover reveal" data-reveal tabindex="0" aria-labelledby="card3-title">
-            <div class="relative">
-              <img data-src="https://images.unsplash.com/photo-1503602642458-232111445657?w=1000&q=60&auto=format&fit=crop" alt="Artisanat centrafricain" loading="lazy" class="w-full h-56 object-cover img-reveal" />
-              <div class="absolute top-3 left-3 bg-amber-400 text-sm text-slate-900 px-3 py-1 rounded-full">Vedette</div>
-              <div class="absolute right-3 bottom-3 bg-black/70 text-white px-3 py-1 rounded-full text-xs">267</div>
-            </div>
-            <div class="p-4">
-              <div class="text-xs text-amber-600 inline-block border border-amber-100 px-2 py-1 rounded-full">Artisanat</div>
-              <h4 id="card3-title" class="mt-3 font-semibold">Artisanat Centrafricain</h4>
-              <p class="mt-2 text-sm text-slate-600">Sculptures et textiles réalisés par artisans locaux.</p>
-              <div class="mt-4 flex items-center justify-between">
-                <div class="text-xs text-slate-500">Bangui, RCA</div>
-                <div class="text-xs bg-emerald-600 text-white px-2 py-1 rounded-full">Active</div>
-              </div>
-            </div>
-          </article>
-        </div>
-
-        <div class="mt-8 text-center">
-          <a href="#catalog-all" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-blue-500 text-white font-semibold shadow hover:scale-105 transition focus-ring">Voir plus d'annonces</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- CTA + STATS (aria-live for stats) -->
-    <section class="py-12 lg:py-16 bg-gradient-to-b from-white to-slate-50" aria-labelledby="cta-title">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-          <div class="md:col-span-2 bg-gradient-to-r from-blue-50 to-white rounded-2xl p-6 lg:p-8 shadow-lg border border-slate-100 reveal" data-reveal>
-            <h3 id="cta-title" class="text-2xl font-bold">Prêt à lancer votre première campagne ?</h3>
-            <p class="mt-2 text-slate-600">Nous vous guidons pas à pas. Choisissez un format, définissez le ciblage et mettez en ligne en quelques minutes.</p>
-            <div class="mt-6 flex gap-3 flex-wrap">
-              <a href="#nouvelle" class="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 to-amber-400 px-5 py-3 rounded-lg font-semibold text-black shadow focus-ring">Commencer</a>
-              <a href="#contact" class="inline-flex items-center gap-2 px-4 py-3 rounded-lg border border-slate-200 focus-ring">Demander une démo</a>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-1 gap-4">
-            <div class="rounded-2xl p-4 bg-white border border-slate-100 shadow reveal" data-reveal>
-              <div class="text-sm text-slate-500">Total d'annonces</div>
-              <div class="mt-2 text-2xl font-extrabold text-blue-600" aria-live="polite" id="stat-ads">124</div>
-            </div>
-
-            <div class="rounded-2xl p-4 bg-white border border-slate-100 shadow reveal" data-reveal>
-              <div class="text-sm text-slate-500">Vues ce mois</div>
-              <div class="mt-2 text-2xl font-extrabold text-amber-500" aria-live="polite" id="stat-views">48 210</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer role="contentinfo" class="py-8">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-sm text-slate-500">
-        <div class="flex flex-col md:flex-row items-center justify-between gap-4">
-          <div>© <span id="year2"></span> Songo Beafrika — Tous droits réservés</div>
-          <div class="flex gap-4">
-            <a href="#" class="hover:text-slate-700 focus-ring">Aide</a>
-            <a href="#" class="hover:text-slate-700 focus-ring">CGU</a>
-            <a href="#" class="hover:text-slate-700 focus-ring">Politique de confidentialité</a>
-          </div>
-        </div>
-      </div>
-    </footer>
-
-  </main>
-
-  <script>
-    // dynamic year
-    document.getElementById('year2').textContent = new Date().getFullYear();
-
-    // mobile menu toggle with good a11y
-    const mobileBtn = document.getElementById('mobileMenuBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
-    mobileBtn?.addEventListener('click', () => {
-      const isHidden = mobileMenu.classList.toggle('hidden');
-      mobileBtn.setAttribute('aria-expanded', String(!isHidden));
-    });
-    window.addEventListener('resize', () => {
-      if (window.innerWidth >= 640) mobileMenu.classList.add('hidden');
-    });
-
-    // IntersectionObserver for reveal animations
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!prefersReducedMotion) {
-      const revealEls = document.querySelectorAll('[data-reveal]');
-      const io = new IntersectionObserver((entries, obs) => {
-        for (const e of entries) {
-          if (e.isIntersecting) {
-            e.target.classList.add('is-visible');
-            obs.unobserve(e.target);
-          }
-        }
-      }, { threshold: 0.12 });
-
-      revealEls.forEach(el => io.observe(el));
-    } else {
-      // if reduced motion, make visible immediately
-      document.querySelectorAll('[data-reveal]').forEach(el => el.classList.add('is-visible'));
-    }
-
-    // Lazy image reveal: when each image loads set loaded class
-    // Also supports data-src progressive loading if you want to swap src on intersection
-    const lazyImgs = document.querySelectorAll('img.img-reveal');
-    lazyImgs.forEach(img => {
-      // If browser lazy-loaded and already complete:
-      if (img.complete) {
-        img.classList.add('loaded');
-      } else {
-        img.addEventListener('load', () => img.classList.add('loaded'), { once: true });
-      }
-    });
-
-    // Optional: progressively set data-src to src for large preview images only when visible
-    const progressiveImgs = document.querySelectorAll('img[data-src]');
-    if (!prefersReducedMotion) {
-      const imgObserver = new IntersectionObserver((entries, obs) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const i = entry.target;
-            if (i.dataset.src) {
-              i.src = i.dataset.src;
-              i.removeAttribute('data-src');
-            }
-            obs.unobserve(i);
-          }
-        });
-      }, { rootMargin: '200px', threshold: 0.01 });
-      progressiveImgs.forEach(i => imgObserver.observe(i));
-    } else {
-      progressiveImgs.forEach(i => {
-        if (i.dataset.src) i.src = i.dataset.src;
-      });
-    }
-  </script>
 </body>
 </html>
