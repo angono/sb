@@ -3,17 +3,24 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Mes Annonces — Tailwind</title>
-  <!-- Tailwind CDN for quick demo (replace with your build in prod) -->
+  <title>FAQs — Songo Beafrika</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* small focus fallback for keyboard users */
+    .focus-ring:focus { outline: none; box-shadow: 0 8px 24px rgba(59,130,246,0.12); border-radius: .375rem; }
+  </style>
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased">
 
-  <nav role="navigation" aria-label="Navigation principale" class="sticky inset-x-0 top-0 z-50 bg-white/75 backdrop-blur-md border-b border-slate-100 md:hidden">
+  <!-- Skip link for accessibility -->
+  <a class="sr-only focus:not-sr-only focus-ring p-2 m-2 rounded bg-white" href="#main">Aller au contenu</a>
+
+  <!-- Top nav for mobile -->
+  <nav role="navigation" aria-label="Navigation principale" class="sticky top-0 z-30 bg-white/75 backdrop-blur-md border-b border-slate-100 md:hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="h-16 flex items-center justify-between">
+      <div class="h-16 flex items-center">
         <a href="index.html" class="flex items-center gap-3">
-          <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-blue-500 to-amber-400 shadow-sm flex items-center justify-center text-white font-bold">SB</div>
+          <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-blue-500 to-amber-400 text-white shadow-sm flex items-center justify-center font-bold">SB</div>
           <div>
             <div class="text-base font-semibold">Songo Beafrika</div>
             <div class="text-xs text-slate-400 -mt-0.5">Promotion & Publicité</div>
@@ -25,7 +32,7 @@
 
   <div class="min-h-screen flex">
 
-    <!-- SIDEBAR -->
+    <!-- SIDEBAR (desktop) -->
     <aside class="hidden md:block sticky top-0 h-dvh w-72 bg-white border-r border-slate-200">
       <div class="p-5 flex items-center gap-3 border-b border-slate-100">
         <div class="w-12 h-12 rounded-lg bg-gradient-to-r from-blue-500 to-amber-400 text-white flex items-center justify-center font-bold shadow">
@@ -87,19 +94,151 @@
       </div>
     </aside>
 
-    <!-- MAIN -->
-    <main class="flex-1 px-4 md:px-8 py-8">
-      <!-- header -->
-      <div class="items-start justify-start mb-6">
-        <h1 class="text-3xl font-extrabold tracking-tight">FAQs</h1>
-        <p class="text-slate-500 mt-1">Foire aux questions</p>
-      </div>
+    <!-- Main content -->
+    <main id="main" class="flex-1 px-4 md:px-8 py-8">
+      <div class="max-w-6xl mx-auto">
 
-      <!-- Contents -->
-      <div class="p-6">
-        
+        <!-- Header -->
+        <header class="mb-6">
+          <h1 class="text-3xl font-extrabold tracking-tight">FAQs</h1>
+          <p class="text-slate-500 mt-1">Questions fréquentes — toutes les réponses sont affichées ci-dessous.</p>
+        </header>
+
+        <!-- Categories quick-links -->
+        <nav aria-label="Catégories FAQ" class="mb-6">
+          <ul class="flex flex-wrap gap-3">
+            <li><a href="#publier" class="px-3 py-1 rounded-full bg-slate-50 text-slate-800 hover:bg-slate-100 focus-ring">Publier</a></li>
+            <li><a href="#compte" class="px-3 py-1 rounded-full bg-white border border-slate-100 text-slate-700 hover:bg-slate-100 focus-ring">Compte</a></li>
+            <li><a href="#paiement" class="px-3 py-1 rounded-full bg-white border border-slate-100 text-slate-700 hover:bg-slate-100 focus-ring">Paiement</a></li>
+            <li><a href="#visibilite" class="px-3 py-1 rounded-full bg-white border border-slate-100 text-slate-700 hover:bg-slate-100 focus-ring">Visibilité</a></li>
+            <li><a href="#support" class="px-3 py-1 rounded-full bg-white border border-slate-100 text-slate-700 hover:bg-slate-100 focus-ring">Support</a></li>
+          </ul>
+        </nav>
+
+        <!-- All FAQs visible (no JS) -->
+        <section class="space-y-8">
+
+          <!-- PUBLISHING -->
+          <article id="publier" class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
+            <h2 class="text-xl font-semibold mb-4">Publier</h2>
+
+            <dl class="space-y-4">
+              <div>
+                <dt class="font-medium text-slate-800">Comment publier une annonce ?</dt>
+                <dd class="mt-1 text-sm text-slate-600">
+                  Pour publier une annonce, cliquez sur « Créer une Annonce », choisissez le format (image, vidéo, audio), complétez le formulaire et suivez les étapes de paiement si nécessaire. Vous retrouverez votre annonce dans « Mes Annonces ».
+                </dd>
+              </div>
+
+              <div>
+                <dt class="font-medium text-slate-800">Quels formats sont acceptés ?</dt>
+                <dd class="mt-1 text-sm text-slate-600">
+                  Nous acceptons images (JPEG/PNG), vidéos (MP4) et fichiers audio (MP3). Les tailles et durées recommandées s'affichent lors du dépôt.
+                </dd>
+              </div>
+
+              <div>
+                <dt class="font-medium text-slate-800">Puis-je modifier une annonce après publication ?</dt>
+                <dd class="mt-1 text-sm text-slate-600">
+                  Oui, rendez-vous dans « Mes Annonces », sélectionnez l’annonce et utilisez le bouton Modifier pour mettre à jour texte, images ou paramètres de visibilité.
+                </dd>
+              </div>
+            </dl>
+          </article>
+
+          <!-- ACCOUNT -->
+          <article id="compte" class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
+            <h2 class="text-xl font-semibold mb-4">Compte</h2>
+
+            <dl class="space-y-4">
+              <div>
+                <dt class="font-medium text-slate-800">Comment modifier mes informations de compte ?</dt>
+                <dd class="mt-1 text-sm text-slate-600">
+                  Allez dans Paramètres → Profil pour mettre à jour votre nom, téléphone et email. Après changement d'email, vérifiez votre boîte pour le lien de confirmation.
+                </dd>
+              </div>
+
+              <div>
+                <dt class="font-medium text-slate-800">Comment supprimer mon compte ?</dt>
+                <dd class="mt-1 text-sm text-slate-600">
+                  La suppression est disponible dans Paramètres → Supprimer le compte. Cette action est irréversible : toutes vos annonces et données seront supprimées.
+                </dd>
+              </div>
+            </dl>
+          </article>
+
+          <!-- PAYMENTS -->
+          <article id="paiement" class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
+            <h2 class="text-xl font-semibold mb-4">Paiement</h2>
+
+            <dl class="space-y-4">
+              <div>
+                <dt class="font-medium text-slate-800">Quels moyens de paiement acceptez-vous ?</dt>
+                <dd class="mt-1 text-sm text-slate-600">
+                  Nous acceptons les cartes bancaires et, selon le pays, Mobile Money. Pour facturation entreprise, contactez le support.
+                </dd>
+              </div>
+
+              <div>
+                <dt class="font-medium text-slate-800">Puis-je obtenir une facture ?</dt>
+                <dd class="mt-1 text-sm text-slate-600">
+                  Oui — après paiement, un reçu est généré. Pour une facture détaillée ou entreprise, ouvrez un ticket via le support.
+                </dd>
+              </div>
+            </dl>
+          </article>
+
+          <!-- VISIBILITY -->
+          <article id="visibilite" class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
+            <h2 class="text-xl font-semibold mb-4">Visibilité</h2>
+
+            <dl class="space-y-4">
+              <div>
+                <dt class="font-medium text-slate-800">Comment augmenter la visibilité de mon annonce ?</dt>
+                <dd class="mt-1 text-sm text-slate-600">
+                  Utilisez un visuel de qualité, activez la promotion (Vedette) et ciblez la zone géographique. Publier régulièrement et mettre à jour le contenu améliore les performances.
+                </dd>
+              </div>
+
+              <div>
+                <dt class="font-medium text-slate-800">Qu'est-ce que « Vedette » ?</dt>
+                <dd class="mt-1 text-sm text-slate-600">
+                  « Vedette » est une option payante qui met en avant votre annonce dans les listings pour une période donnée, augmentant sa visibilité.
+                </dd>
+              </div>
+            </dl>
+          </article>
+
+          <!-- SUPPORT -->
+          <article id="support" class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
+            <h2 class="text-xl font-semibold mb-4">Support</h2>
+
+            <dl class="space-y-4">
+              <div>
+                <dt class="font-medium text-slate-800">Comment contacter le support ?</dt>
+                <dd class="mt-1 text-sm text-slate-600">
+                  Envoyez un email à <a class="text-blue-600 underline" href="mailto:help@songobeafrika.com">help@songobeafrika.com</a> ou utilisez le chat disponible sur la plateforme.
+                </dd>
+              </div>
+
+              <div>
+                <dt class="font-medium text-slate-800">Temps de réponse</dt>
+                <dd class="mt-1 text-sm text-slate-600">
+                  Notre équipe vise à répondre sous 24 à 48 heures en semaine. Pour les urgences (compte/transaction), indiquez "URGENT" dans l'objet.
+                </dd>
+              </div>
+            </dl>
+          </article>
+
+        </section>
+
+        <!-- CTA -->
+        <div class="mt-8 text-center">
+          <a href="mailto:tirelangono@gmail.com" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-blue-500 text-white font-semibold shadow">Contacter le support</a>
+        </div>
       </div>
     </main>
+
   </div>
 
 </body>

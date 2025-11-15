@@ -1,519 +1,156 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Songo Beafrika - Innovation Publicitaire</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            'deep-purple': '#1a0b2e',
-            'electric-blue': '#00f5ff',
-            'hot-pink': '#ff2d75',
-            'vibrant-yellow': '#ffde59',
-            'dark-teal': '#0f3460'
-          },
-          fontFamily: {
-            'montserrat': ['Montserrat', 'sans-serif'],
-            'playfair': ['Playfair Display', 'serif'],
-          },
-          animation: {
-            'float': 'float 6s ease-in-out infinite',
-            'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-          },
-          keyframes: {
-            float: {
-              '0%, 100%': { transform: 'translateY(0)' },
-              '50%': { transform: 'translateY(-10px)' },
-            }
-          }
-        }
-      }
-    }
-  </script>
-  <style>
-    body {
-      font-family: 'Montserrat', sans-serif;
-      overflow-x: hidden;
-    }
-    
-    .hero-bg {
-      background: linear-gradient(rgba(26, 11, 46, 0.85), rgba(15, 52, 96, 0.9)), 
-                  url('https://images.unsplash.com/photo-1557804483-ef2a13c9c9b9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-    }
-    
-    .shape-divider {
-      height: 150px;
-      overflow: hidden;
-      transform: rotate(180deg);
-    }
-    
-    .shape-divider svg {
-      height: 100%;
-      width: 100%;
-    }
-    
-    .shape-divider .shape-fill {
-      fill: #1a0b2e;
-    }
-    
-    .floating-card {
-      animation: float 6s ease-in-out infinite;
-    }
-    
-    .card-1 {
-      animation-delay: 0s;
-    }
-    
-    .card-2 {
-      animation-delay: 2s;
-    }
-    
-    .card-3 {
-      animation-delay: 4s;
-    }
-    
-    .gradient-text {
-      background: linear-gradient(90deg, #ff2d75, #00f5ff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    
-    .feature-card {
-      transition: all 0.4s ease;
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    
-    .feature-card:hover {
-      transform: translateY(-10px) scale(1.02);
-      box-shadow: 0 20px 40px rgba(0, 245, 255, 0.2);
-      border-color: #00f5ff;
-    }
-    
-    .ad-type-card {
-      transition: all 0.3s ease;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    
-    .ad-type-card:hover {
-      transform: translateY(-5px);
-      border-color: #ff2d75;
-      box-shadow: 0 10px 20px rgba(255, 45, 117, 0.2);
-    }
-    
-    .listing-card {
-      transition: all 0.3s ease;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    
-    .listing-card:hover {
-      transform: translateY(-5px);
-      border-color: #ffde59;
-      box-shadow: 0 10px 20px rgba(255, 222, 89, 0.2);
-    }
-    
-    .glow {
-      box-shadow: 0 0 20px rgba(0, 245, 255, 0.5);
-    }
-    
-    .pink-glow {
-      box-shadow: 0 0 20px rgba(255, 45, 117, 0.5);
-    }
-    
-    .cta-section {
-      background: linear-gradient(135deg, #1a0b2e 0%, #0f3460 50%, #1a0b2e 100%);
-    }
-    
-    @media (max-width: 768px) {
-      .hero-bg {
-        background-attachment: scroll;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Créer une Annonce - Songo Beafrika</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="bg-deep-purple text-white">
+<body class="bg-gray-50 min-h-screen">
+    <div class="container mx-auto px-4 py-8 max-w-3xl">
+        <!-- Header -->
+        <header class="mb-8">
+            <h1 class="text-3xl font-bold text-gray-800">Créer une Annonce</h1>
+            <p class="text-gray-600 mt-2">Faites connaître votre activité sur Songo Beafrika</p>
+        </header>
 
-  <!-- Hero Section with Background Image -->
-  <section class="hero-bg min-h-screen flex flex-col justify-center relative overflow-hidden">
-    <!-- Animated background elements -->
-    <div class="absolute top-10 left-10 w-20 h-20 rounded-full bg-electric-blue opacity-20 animate-pulse-slow"></div>
-    <div class="absolute top-1/3 right-20 w-16 h-16 rounded-full bg-hot-pink opacity-30 animate-pulse-slow" style="animation-delay: 1s;"></div>
-    <div class="absolute bottom-20 left-1/4 w-24 h-24 rounded-full bg-vibrant-yellow opacity-20 animate-pulse-slow" style="animation-delay: 2s;"></div>
-    
-    <div class="container mx-auto px-4 py-16 relative z-10">
-      <div class="max-w-4xl mx-auto text-center">
-        <div class="inline-flex items-center bg-black/30 backdrop-blur-md rounded-full px-6 py-3 mb-8 border border-electric-blue/30 glow">
-          <span class="text-vibrant-yellow mr-2 text-xl">✨</span>
-          <span class="font-medium">Plateforme de Promotion N°1 en Centrafrique</span>
-        </div>
-        
-        <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight font-playfair">
-          <span class="block">SONGO</span>
-          <span class="block gradient-text">BEAFRIKA</span>
-        </h1>
-        
-        <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl mx-auto">
-          Révolutionnez votre présence digitale avec des solutions publicitaires innovantes.
-        </p>
-        
-        <div class="flex flex-col sm:flex-row justify-center gap-6 mt-12">
-          <button class="bg-electric-blue text-deep-purple font-bold px-8 py-4 rounded-full hover:bg-white transition-all duration-300 transform hover:scale-105 glow flex items-center justify-center">
-            <span>Lancer Votre Campagne</span>
-            <i class="fas fa-rocket ml-3"></i>
-          </button>
-          <button class="bg-transparent border-2 border-hot-pink text-white font-bold px-8 py-4 rounded-full hover:bg-hot-pink transition-all duration-300 transform hover:scale-105 pink-glow flex items-center justify-center">
-            <span>Explorer les Possibilités</span>
-            <i class="fas fa-arrow-right ml-3"></i>
-          </button>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Floating cards -->
-    <div class="absolute bottom-10 left-10 floating-card card-1 hidden md:block">
-      <div class="bg-white/10 backdrop-blur-md p-4 rounded-xl border border-electric-blue/30 w-48">
-        <div class="flex items-center mb-2">
-          <div class="w-8 h-8 bg-electric-blue rounded-full flex items-center justify-center mr-2">
-            <i class="fas fa-chart-line text-deep-purple text-sm"></i>
-          </div>
-          <span class="font-bold">+250%</span>
-        </div>
-        <p class="text-xs">Augmentation moyenne de visibilité</p>
-      </div>
-    </div>
-    
-    <div class="absolute top-20 right-10 floating-card card-2 hidden md:block">
-      <div class="bg-white/10 backdrop-blur-md p-4 rounded-xl border border-hot-pink/30 w-48">
-        <div class="flex items-center mb-2">
-          <div class="w-8 h-8 bg-hot-pink rounded-full flex items-center justify-center mr-2">
-            <i class="fas fa-users text-white text-sm"></i>
-          </div>
-          <span class="font-bold">10K+</span>
-        </div>
-        <p class="text-xs">Entreprises nous font confiance</p>
-      </div>
-    </div>
-    
-    <div class="absolute top-1/2 left-1/4 floating-card card-3 hidden lg:block">
-      <div class="bg-white/10 backdrop-blur-md p-4 rounded-xl border border-vibrant-yellow/30 w-48">
-        <div class="flex items-center mb-2">
-          <div class="w-8 h-8 bg-vibrant-yellow rounded-full flex items-center justify-center mr-2">
-            <i class="fas fa-globe-africa text-deep-purple text-sm"></i>
-          </div>
-          <span class="font-bold">98%</span>
-        </div>
-        <p class="text-xs">Couverture nationale</p>
-      </div>
-    </div>
-  </section>
+        <!-- Main Form -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <!-- Type de Publicité Section -->
+            <section class="p-6 border-b">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">Type de Publicité</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="border-2 border-gray-200 rounded-lg p-4 text-center cursor-pointer hover:border-blue-500 transition-colors">
+                        <i class="fas fa-video text-blue-500 text-2xl mb-2"></i>
+                        <p class="font-medium">Publicité Vidéo</p>
+                    </div>
+                    <div class="border-2 border-blue-500 rounded-lg p-4 text-center cursor-pointer bg-blue-50">
+                        <i class="fas fa-image text-blue-500 text-2xl mb-2"></i>
+                        <p class="font-medium">Annonce Visuelle</p>
+                    </div>
+                    <div class="border-2 border-gray-200 rounded-lg p-4 text-center cursor-pointer hover:border-blue-500 transition-colors">
+                        <i class="fas fa-volume-up text-blue-500 text-2xl mb-2"></i>
+                        <p class="font-medium">Spot Audio</p>
+                    </div>
+                    <div class="border-2 border-gray-200 rounded-lg p-4 text-center cursor-pointer hover:border-blue-500 transition-colors">
+                        <i class="fas fa-newspaper text-blue-500 text-2xl mb-2"></i>
+                        <p class="font-medium">Publi-reportage</p>
+                    </div>
+                </div>
+            </section>
 
-  <!-- Shape Divider -->
-  <div class="shape-divider">
-    <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
-      <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" class="shape-fill"></path>
-      <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" class="shape-fill"></path>
-      <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" class="shape-fill"></path>
-    </svg>
-  </div>
+            <!-- Informations de Base Section -->
+            <section class="p-6 border-b">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">Informations de Base</h2>
+                
+                <!-- Titre de l'annonce -->
+                <div class="mb-6">
+                    <label class="block text-gray-700 font-medium mb-2">
+                        Titre de l'annonce <span class="text-red-500">*</span>
+                    </label>
+                    <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Ex: Restaurant Le Savana - Cuisine locale">
+                </div>
+                
+                <!-- Description -->
+                <div class="mb-6">
+                    <label class="block text-gray-700 font-medium mb-2">
+                        Description <span class="text-red-500">*</span>
+                    </label>
+                    <textarea class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 h-32" placeholder="Décrivez votre activité en détail..."></textarea>
+                </div>
+                
+                <!-- Catégorie et Localisation -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label class="block text-gray-700 font-medium mb-2">
+                            Catégorie <span class="text-red-500">*</span>
+                        </label>
+                        <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="" disabled selected>Sélectionnez une catégorie</option>
+                            <option value="restaurant">Restaurant</option>
+                            <option value="boutique">Boutique</option>
+                            <option value="service">Service</option>
+                            <option value="autre">Autre</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 font-medium mb-2">
+                            Localisation <span class="text-red-500">*</span>
+                        </label>
+                        <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Ex: Bangui, Centrafrique">
+                    </div>
+                </div>
+            </section>
 
-  <!-- Pourquoi Section -->
-  <section class="py-20 bg-deep-purple">
-    <div class="container mx-auto px-4">
-      <div class="text-center mb-16">
-        <h2 class="text-4xl md:text-5xl font-bold mb-6 font-playfair">
-          Pourquoi <span class="gradient-text">Songo Beafrika</span> ?
-        </h2>
-        <p class="text-xl text-gray-300 max-w-3xl mx-auto">
-          Une approche révolutionnaire de la publicité qui transforme votre visibilité en résultats tangibles.
-        </p>
-      </div>
-      
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-        <div class="feature-card rounded-2xl p-8 text-center">
-          <div class="w-20 h-20 bg-gradient-to-br from-electric-blue to-dark-teal rounded-full flex items-center justify-center mb-6 mx-auto glow">
-            <i class="fas fa-bullseye text-3xl text-white"></i>
-          </div>
-          <h3 class="font-bold text-2xl mb-4 text-electric-blue">Précision Maximale</h3>
-          <p class="text-gray-300">Notre technologie d'IA cible votre audience idéale avec une précision chirurgicale, éliminant le gaspillage publicitaire.</p>
+            <!-- Média Section -->
+            <section class="p-6 border-b">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">Média</h2>
+                <div class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center cursor-pointer hover:border-blue-500 transition-colors">
+                    <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-4"></i>
+                    <p class="font-medium text-gray-700">Cliquez pour télécharger</p>
+                    <p class="text-gray-500 text-sm mt-2">Image JPG, PNG, GIF</p>
+                </div>
+            </section>
+
+            <!-- Informations de Contact Section -->
+            <section class="p-6">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">Informations de Contact</h2>
+                
+                <!-- Nom de l'entreprise -->
+                <div class="mb-6">
+                    <label class="block text-gray-700 font-medium mb-2">
+                        Nom de l'entreprise / Particulier <span class="text-red-500">*</span>
+                    </label>
+                    <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Ex: Restaurant Le Savana">
+                </div>
+                
+                <!-- Téléphone -->
+                <div class="mb-6">
+                    <label class="block text-gray-700 font-medium mb-2">Téléphone</label>
+                    <input type="tel" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="+236 XX XX XX XX">
+                </div>
+                
+                <!-- Email -->
+                <div class="mb-6">
+                    <label class="block text-gray-700 font-medium mb-2">Email</label>
+                    <input type="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="contact@example.com">
+                </div>
+                
+                <!-- Site Web -->
+                <div class="mb-6">
+                    <label class="block text-gray-700 font-medium mb-2">Site Web (optionnel)</label>
+                    <input type="url" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="https://www.example.com">
+                </div>
+            </section>
+
+            <!-- Action Buttons -->
+            <div class="p-6 bg-gray-50 flex flex-col sm:flex-row justify-end space-y-3 sm:space-y-0 sm:space-x-4">
+                <button class="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-100 transition-colors">
+                    Annuler
+                </button>
+                <button class="px-6 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors">
+                    Publier l'annonce
+                </button>
+            </div>
         </div>
-        
-        <div class="feature-card rounded-2xl p-8 text-center">
-          <div class="w-20 h-20 bg-gradient-to-br from-hot-pink to-deep-purple rounded-full flex items-center justify-center mb-6 mx-auto pink-glow">
-            <i class="fas fa-chart-line text-3xl text-white"></i>
-          </div>
-          <h3 class="font-bold text-2xl mb-4 text-hot-pink">Croissance Exponentielle</h3>
-          <p class="text-gray-300">Débloquez des taux de conversion records avec nos stratégies publicitaires multi-canaux optimisées.</p>
-        </div>
-        
-        <div class="feature-card rounded-2xl p-8 text-center">
-          <div class="w-20 h-20 bg-gradient-to-br from-vibrant-yellow to-hot-pink rounded-full flex items-center justify-center mb-6 mx-auto" style="box-shadow: 0 0 20px rgba(255, 222, 89, 0.5);">
-            <i class="fas fa-users text-3xl text-deep-purple"></i>
-          </div>
-          <h3 class="font-bold text-2xl mb-4 text-vibrant-yellow">Communauté Engagée</h3>
-          <p class="text-gray-300">Bénéficiez de l'effet réseau de notre plateforme qui connecte les entreprises aux consommateurs les plus pertinents.</p>
-        </div>
-      </div>
     </div>
-  </section>
 
-  <!-- Types de Publicités -->
-  <section class="py-20 bg-dark-teal">
-    <div class="container mx-auto px-4">
-      <div class="text-center mb-16">
-        <h2 class="text-4xl md:text-5xl font-bold mb-6 font-playfair">
-          Formats <span class="text-vibrant-yellow">Créatifs</span>
-        </h2>
-        <p class="text-xl text-gray-300 max-w-3xl mx-auto">
-          Découvrez nos solutions publicitaires innovantes conçues pour captiver votre audience.
-        </p>
-      </div>
-      
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-        <div class="ad-type-card rounded-xl p-6 text-center">
-          <div class="w-16 h-16 bg-electric-blue/20 rounded-xl flex items-center justify-center mb-4 mx-auto border border-electric-blue/30">
-            <i class="fas fa-video text-electric-blue text-2xl"></i>
-          </div>
-          <h3 class="font-bold text-lg mb-2">Expériences Immersives</h3>
-          <p class="text-gray-400 text-sm mb-3">Publicités vidéo 360° et réalité augmentée</p>
-          <div class="text-electric-blue font-semibold">12 formats disponibles</div>
-        </div>
-        
-        <div class="ad-type-card rounded-xl p-6 text-center">
-          <div class="w-16 h-16 bg-hot-pink/20 rounded-xl flex items-center justify-center mb-4 mx-auto border border-hot-pink/30">
-            <i class="fas fa-podcast text-hot-pink text-2xl"></i>
-          </div>
-          <h3 class="font-bold text-lg mb-2">Audio Interactif</h3>
-          <p class="text-gray-400 text-sm mb-3">Spots audio avec déclencheurs vocaux</p>
-          <div class="text-hot-pink font-semibold">8 formats disponibles</div>
-        </div>
-        
-        <div class="ad-type-card rounded-xl p-6 text-center">
-          <div class="w-16 h-16 bg-vibrant-yellow/20 rounded-xl flex items-center justify-center mb-4 mx-auto border border-vibrant-yellow/30">
-            <i class="fas fa-mobile-alt text-vibrant-yellow text-2xl"></i>
-          </div>
-          <h3 class="font-bold text-lg mb-2">Mobile First</h3>
-          <p class="text-gray-400 text-sm mb-3">Publicités optimisées pour mobile</p>
-          <div class="text-vibrant-yellow font-semibold">15 formats disponibles</div>
-        </div>
-        
-        <div class="ad-type-card rounded-xl p-6 text-center">
-          <div class="w-16 h-16 bg-white/20 rounded-xl flex items-center justify-center mb-4 mx-auto border border-white/30">
-            <i class="fas fa-newspaper text-white text-2xl"></i>
-          </div>
-          <h3 class="font-bold text-lg mb-2">Contenu Narratif</h3>
-          <p class="text-gray-400 text-sm mb-3">Publi-reportages et brand storytelling</p>
-          <div class="text-white font-semibold">6 formats disponibles</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Featured Listings -->
-  <section class="py-20 bg-deep-purple">
-    <div class="container mx-auto px-4">
-      <div class="flex flex-col md:flex-row justify-between items-center mb-12">
-        <div>
-          <h2 class="text-4xl md:text-5xl font-bold mb-2 font-playfair">
-            Campagnes <span class="text-hot-pink">Vedettes</span>
-          </h2>
-          <p class="text-xl text-gray-300">Découvrez des exemples de campagnes qui ont marqué les esprits</p>
-        </div>
-        <button class="mt-6 md:mt-0 bg-hot-pink text-white font-bold px-8 py-4 rounded-full hover:bg-pink-600 transition-all duration-300 transform hover:scale-105 pink-glow flex items-center">
-          <span>Voir toutes les campagnes</span>
-          <i class="fas fa-arrow-right ml-3"></i>
-        </button>
-      </div>
-      
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- Listing 1 -->
-        <div class="listing-card rounded-xl overflow-hidden">
-          <div class="h-48 bg-gradient-to-r from-electric-blue to-dark-teal relative">
-            <div class="absolute top-4 right-4 bg-deep-purple text-electric-blue font-bold px-3 py-1 rounded-full text-sm border border-electric-blue">
-              Tendance
-            </div>
-          </div>
-          <div class="p-6">
-            <div class="flex items-center mb-4">
-              <div class="w-12 h-12 bg-electric-blue/20 rounded-full flex items-center justify-center text-electric-blue mr-3 border border-electric-blue/30">
-                <i class="fas fa-tshirt"></i>
-              </div>
-              <div>
-                <h3 class="font-bold text-lg">Mode Urbaine RCA</h3>
-                <p class="text-gray-400 text-sm">Bangui, Centrafrique</p>
-              </div>
-            </div>
-            <p class="text-gray-300 mb-4">Campagne de lancement d'une marque de vêtements locaux avec influenceurs digitaux.</p>
-            <div class="flex justify-between items-center">
-              <span class="text-electric-blue font-bold">+320% d'engagement</span>
-              <button class="text-hot-pink hover:text-pink-300 font-medium">
-                Voir étude de cas <i class="fas fa-chevron-right ml-1 text-xs"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Listing 2 -->
-        <div class="listing-card rounded-xl overflow-hidden">
-          <div class="h-48 bg-gradient-to-r from-hot-pink to-vibrant-yellow relative">
-            <div class="absolute top-4 right-4 bg-deep-purple text-hot-pink font-bold px-3 py-1 rounded-full text-sm border border-hot-pink">
-              Viral
-            </div>
-          </div>
-          <div class="p-6">
-            <div class="flex items-center mb-4">
-              <div class="w-12 h-12 bg-hot-pink/20 rounded-full flex items-center justify-center text-hot-pink mr-3 border border-hot-pink/30">
-                <i class="fas fa-utensils"></i>
-              </div>
-              <div>
-                <h3 class="font-bold text-lg">Saveurs Centrafricaines</h3>
-                <p class="text-gray-400 text-sm">Bimbo, Centrafrique</p>
-              </div>
-            </div>
-            <p class="text-gray-300 mb-4">Campagne digitale pour un restaurant traditionnel avec réalité augmentée.</p>
-            <div class="flex justify-between items-center">
-              <span class="text-hot-pink font-bold">+450% de réservations</span>
-              <button class="text-electric-blue hover:text-blue-300 font-medium">
-                Voir étude de cas <i class="fas fa-chevron-right ml-1 text-xs"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Listing 3 -->
-        <div class="listing-card rounded-xl overflow-hidden">
-          <div class="h-48 bg-gradient-to-r from-vibrant-yellow to-hot-pink relative">
-            <div class="absolute top-4 right-4 bg-deep-purple text-vibrant-yellow font-bold px-3 py-1 rounded-full text-sm border border-vibrant-yellow">
-              Innovation
-            </div>
-          </div>
-          <div class="p-6">
-            <div class="flex items-center mb-4">
-              <div class="w-12 h-12 bg-vibrant-yellow/20 rounded-full flex items-center justify-center text-vibrant-yellow mr-3 border border-vibrant-yellow/30">
-                <i class="fas fa-mobile-alt"></i>
-              </div>
-              <div>
-                <h3 class="font-bold text-lg">Tech Solutions RCA</h3>
-                <p class="text-gray-400 text-sm">Bangui, Centrafrique</p>
-              </div>
-            </div>
-            <p class="text-gray-300 mb-4">Lancement d'une application mobile avec campagne publicitaire interactive.</p>
-            <div class="flex justify-between items-center">
-              <span class="text-vibrant-yellow font-bold">+15K téléchargements</span>
-              <button class="text-hot-pink hover:text-pink-300 font-medium">
-                Voir étude de cas <i class="fas fa-chevron-right ml-1 text-xs"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA Section -->
-  <section class="cta-section py-20 relative overflow-hidden">
-    <!-- Background elements -->
-    <div class="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-electric-blue opacity-10"></div>
-    <div class="absolute -bottom-20 -left-20 w-64 h-64 rounded-full bg-hot-pink opacity-10"></div>
-    
-    <div class="container mx-auto px-4 text-center relative z-10">
-      <h2 class="text-4xl md:text-6xl font-bold mb-6 font-playfair">
-        Prêt à <span class="gradient-text">révolutionner</span> votre communication ?
-      </h2>
-      <p class="text-xl text-gray-300 max-w-2xl mx-auto mb-10">
-        Rejoignez l'élite des entreprises centrafricaines qui ont choisi l'innovation publicitaire.
-      </p>
-      <div class="flex flex-col sm:flex-row justify-center gap-6">
-        <button class="bg-electric-blue text-deep-purple font-bold px-8 py-4 rounded-full hover:bg-white transition-all duration-300 transform hover:scale-105 glow">
-          Démarrer Maintenant
-        </button>
-        <button class="bg-transparent border-2 border-vibrant-yellow text-white font-bold px-8 py-4 rounded-full hover:bg-vibrant-yellow hover:text-deep-purple transition-all duration-300 transform hover:scale-105">
-          <span>Planifier une Démo</span>
-          <i class="fas fa-calendar-alt ml-3"></i>
-        </button>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="bg-black py-12 border-t border-electric-blue/20">
-    <div class="container mx-auto px-4">
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-        <div>
-          <h3 class="text-2xl font-bold mb-4 font-playfair gradient-text">Songo Beafrika</h3>
-          <p class="text-gray-400">La plateforme publicitaire la plus innovante de Centrafrique.</p>
-          <div class="flex space-x-4 mt-6">
-            <a href="#" class="w-10 h-10 bg-deep-purple rounded-full flex items-center justify-center text-electric-blue hover:bg-electric-blue hover:text-deep-purple transition">
-              <i class="fab fa-facebook-f"></i>
-            </a>
-            <a href="#" class="w-10 h-10 bg-deep-purple rounded-full flex items-center justify-center text-hot-pink hover:bg-hot-pink hover:text-white transition">
-              <i class="fab fa-instagram"></i>
-            </a>
-            <a href="#" class="w-10 h-10 bg-deep-purple rounded-full flex items-center justify-center text-electric-blue hover:bg-electric-blue hover:text-deep-purple transition">
-              <i class="fab fa-twitter"></i>
-            </a>
-            <a href="#" class="w-10 h-10 bg-deep-purple rounded-full flex items-center justify-center text-vibrant-yellow hover:bg-vibrant-yellow hover:text-deep-purple transition">
-              <i class="fab fa-linkedin-in"></i>
-            </a>
-          </div>
-        </div>
-        
-        <div>
-          <h4 class="font-bold mb-4 text-electric-blue">Navigation</h4>
-          <ul class="space-y-2">
-            <li><a href="#" class="text-gray-400 hover:text-electric-blue transition">Accueil</a></li>
-            <li><a href="#" class="text-gray-400 hover:text-electric-blue transition">Solutions</a></li>
-            <li><a href="#" class="text-gray-400 hover:text-electric-blue transition">Tarifs</a></li>
-            <li><a href="#" class="text-gray-400 hover:text-electric-blue transition">Réalisations</a></li>
-          </ul>
-        </div>
-        
-        <div>
-          <h4 class="font-bold mb-4 text-hot-pink">Ressources</h4>
-          <ul class="space-y-2">
-            <li><a href="#" class="text-gray-400 hover:text-hot-pink transition">Blog</a></li>
-            <li><a href="#" class="text-gray-400 hover:text-hot-pink transition">Études de cas</a></li>
-            <li><a href="#" class="text-gray-400 hover:text-hot-pink transition">FAQ</a></li>
-            <li><a href="#" class="text-gray-400 hover:text-hot-pink transition">Support</a></li>
-          </ul>
-        </div>
-        
-        <div>
-          <h4 class="font-bold mb-4 text-vibrant-yellow">Contact</h4>
-          <ul class="space-y-2">
-            <li class="flex items-center text-gray-400">
-              <i class="fas fa-map-marker-alt mr-2 text-electric-blue"></i>
-              <span>Bangui, Centrafrique</span>
-            </li>
-            <li class="flex items-center text-gray-400">
-              <i class="fas fa-phone mr-2 text-hot-pink"></i>
-              <span>+236 XX XX XX XX</span>
-            </li>
-            <li class="flex items-center text-gray-400">
-              <i class="fas fa-envelope mr-2 text-vibrant-yellow"></i>
-              <span>innovation@songobeafrika.cf</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-      
-      <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-        <p>&copy; 2023 Songo Beafrika. Tous droits réservés. | Conçu avec <i class="fas fa-heart text-hot-pink"></i> en Centrafrique</p>
-      </div>
-    </div>
-  </footer>
-
+    <script>
+        // Simple script for ad type selection
+        document.querySelectorAll('.border-2.border-gray-200').forEach(item => {
+            item.addEventListener('click', function() {
+                // Remove selection from all
+                document.querySelectorAll('.border-2').forEach(el => {
+                    el.classList.remove('border-blue-500', 'bg-blue-50');
+                    el.classList.add('border-gray-200');
+                });
+                
+                // Add selection to clicked
+                this.classList.remove('border-gray-200');
+                this.classList.add('border-blue-500', 'bg-blue-50');
+            });
+        });
+    </script>
 </body>
 </html>

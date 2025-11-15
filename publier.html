@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Mes Annonces — Tailwind</title>
+  <title>Créer une Annonce - Songo Beafrika</title>
   <!-- Tailwind CDN for quick demo (replace with your build in prod) -->
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -94,12 +94,132 @@
         <p class="text-slate-500 mt-1">Faites connaître votre activité sur Songo Beafrika</p>
       </div>
 
-      <!-- Contents -->
-      <div class="p-6">
+      <!-- Main Form -->
+      <div class="bg-white rounded-2xl shadow border border-slate-100 overflow-hidden">
+        <!-- Type de Publicité Section -->
+        <section class="p-6 border-b">
+          <h2 class="text-xl font-semibold text-gray-800 mb-4">Type de Publicité</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="flex flex-col border-2 border-gray-200 rounded-lg p-4 items-center cursor-pointer hover:border-blue-500 transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-blue-500 mb-2"><path d="M4.5 4.5a3 3 0 0 0-3 3v9a3 3 0 0 0 3 3h8.25a3 3 0 0 0 3-3v-9a3 3 0 0 0-3-3H4.5ZM19.94 18.75l-2.69-2.69V7.94l2.69-2.69c.944-.945 2.56-.276 2.56 1.06v11.38c0 1.336-1.616 2.005-2.56 1.06Z" /></svg>
+
+              <p class="font-medium">Publicité Vidéo</p>
+            </div>
+            <div class="flex flex-col border-2 border-gray-200 rounded-lg p-4 items-center cursor-pointer hover:border-blue-500 transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-blue-500 mb-2"><path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 0 1 2.25-2.25h16.5A2.25 2.25 0 0 1 22.5 6v12a2.25 2.25 0 0 1-2.25 2.25H3.75A2.25 2.25 0 0 1 1.5 18V6ZM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0 0 21 18v-1.94l-2.69-2.689a1.5 1.5 0 0 0-2.12 0l-.88.879.97.97a.75.75 0 1 1-1.06 1.06l-5.16-5.159a1.5 1.5 0 0 0-2.12 0L3 16.061Zm10.125-7.81a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0Z" clip-rule="evenodd" /></svg>
+
+              <p class="font-medium">Annonce Visuelle</p>
+            </div>
+            <div class="flex flex-col border-2 border-gray-200 rounded-lg p-4 items-center cursor-pointer hover:border-blue-500 transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-blue-500 mb-2"><path d="M13.5 4.06c0-1.336-1.616-2.005-2.56-1.06l-4.5 4.5H4.508c-1.141 0-2.318.664-2.66 1.905A9.76 9.76 0 0 0 1.5 12c0 .898.121 1.768.35 2.595.341 1.24 1.518 1.905 2.659 1.905h1.93l4.5 4.5c.945.945 2.561.276 2.561-1.06V4.06ZM18.584 5.106a.75.75 0 0 1 1.06 0c3.808 3.807 3.808 9.98 0 13.788a.75.75 0 0 1-1.06-1.06 8.25 8.25 0 0 0 0-11.668.75.75 0 0 1 0-1.06Z" /><path d="M15.932 7.757a.75.75 0 0 1 1.061 0 6 6 0 0 1 0 8.486.75.75 0 0 1-1.06-1.061 4.5 4.5 0 0 0 0-6.364.75.75 0 0 1 0-1.06Z" /></svg>
+
+              <p class="font-medium">Spot Audio</p>
+            </div>
+            <div class="flex flex-col border-2 border-gray-200 rounded-lg p-4 items-center cursor-pointer hover:border-blue-500 transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-blue-500 mb-2"><path fill-rule="evenodd" d="M4.125 3C3.089 3 2.25 3.84 2.25 4.875V18a3 3 0 0 0 3 3h15a3 3 0 0 1-3-3V4.875C17.25 3.839 16.41 3 15.375 3H4.125ZM12 9.75a.75.75 0 0 0 0 1.5h1.5a.75.75 0 0 0 0-1.5H12Zm-.75-2.25a.75.75 0 0 1 .75-.75h1.5a.75.75 0 0 1 0 1.5H12a.75.75 0 0 1-.75-.75ZM6 12.75a.75.75 0 0 0 0 1.5h7.5a.75.75 0 0 0 0-1.5H6Zm-.75 3.75a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5H6a.75.75 0 0 1-.75-.75ZM6 6.75a.75.75 0 0 0-.75.75v3c0 .414.336.75.75.75h3a.75.75 0 0 0 .75-.75v-3A.75.75 0 0 0 9 6.75H6Z" clip-rule="evenodd" /><path d="M18.75 6.75h1.875c.621 0 1.125.504 1.125 1.125V18a1.5 1.5 0 0 1-3 0V6.75Z" /></svg>
+
+              <p class="font-medium">Publi-reportage</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Informations de Base Section -->
+        <section class="p-6 border-b">
+          <h2 class="text-xl font-semibold text-gray-800 mb-4">Informations de Base</h2>
+          
+          <!-- Titre de l'annonce -->
+          <div class="mb-6">
+            <label class="block text-gray-700 font-medium mb-2">
+              Titre de l'annonce <span class="text-red-500">*</span>
+            </label>
+            <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Ex: Restaurant Le Savana - Cuisine locale">
+          </div>
+            
+          <!-- Description -->
+          <div class="mb-6">
+            <label class="block text-gray-700 font-medium mb-2">
+              Description <span class="text-red-500">*</span>
+            </label>
+            <textarea class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 h-32" placeholder="Décrivez votre activité en détail..."></textarea>
+          </div>
         
+          <!-- Catégorie et Localisation -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div>
+              <label class="block text-gray-700 font-medium mb-2">
+                Catégorie <span class="text-red-500">*</span>
+              </label>
+              <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <option value="" disabled selected>Sélectionnez une catégorie</option>
+                <option value="restaurant">Restaurant</option>
+                <option value="boutique">Boutique</option>
+                <option value="service">Service</option>
+                <option value="autre">Autre</option>
+              </select>
+            </div>
+              <div>
+                <label class="block text-gray-700 font-medium mb-2">
+                  Localisation <span class="text-red-500">*</span>
+                </label>
+                <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Ex: Bangui, Centrafrique">
+              </div>
+          </div>
+        </section>
+
+        <!-- Média Section -->
+        <section class="p-6 border-b">
+          <h2 class="text-xl font-semibold text-gray-800 mb-4">Média</h2>
+          <div class="flex flex-col border-2 border-dashed border-gray-300 rounded-lg p-8 items-center cursor-pointer hover:border-blue-500 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-10 h-10 text-gray-400 mb-4"><path fill-rule="evenodd" d="M11.47 2.47a.75.75 0 0 1 1.06 0l4.5 4.5a.75.75 0 0 1-1.06 1.06l-3.22-3.22V16.5a.75.75 0 0 1-1.5 0V4.81L8.03 8.03a.75.75 0 0 1-1.06-1.06l4.5-4.5ZM3 15.75a.75.75 0 0 1 .75.75v2.25a1.5 1.5 0 0 0 1.5 1.5h13.5a1.5 1.5 0 0 0 1.5-1.5V16.5a.75.75 0 0 1 1.5 0v2.25a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3V16.5a.75.75 0 0 1 .75-.75Z" clip-rule="evenodd" /></svg>
+
+            <p class="font-medium text-gray-700">Cliquez pour télécharger</p>
+            <p class="text-gray-500 text-sm mt-2">Image JPG, PNG, GIF</p>
+          </div>
+        </section>
+
+        <!-- Informations de Contact Section -->
+        <section class="p-6">
+          <h2 class="text-xl font-semibold text-gray-800 mb-4">Informations de Contact</h2>
+          
+          <!-- Nom de l'entreprise -->
+          <div class="mb-6">
+            <label class="block text-gray-700 font-medium mb-2">
+              Nom de l'entreprise / Particulier <span class="text-red-500">*</span>
+            </label>
+            <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Ex: Restaurant Le Savana">
+          </div>
+        
+          <!-- Téléphone -->
+          <div class="mb-6">
+            <label class="block text-gray-700 font-medium mb-2">Téléphone</label>
+            <input type="tel" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="+236 XX XX XX XX">
+          </div>
+          
+          <!-- Email -->
+          <div class="mb-6">
+            <label class="block text-gray-700 font-medium mb-2">Email</label>
+            <input type="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="contact@example.com">
+          </div>
+          
+          <!-- Site Web -->
+          <div class="mb-6">
+            <label class="block text-gray-700 font-medium mb-2">Site Web (optionnel)</label>
+            <input type="url" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="https://www.example.com">
+          </div>
+        </section>
+
+        <!-- Action Buttons -->
+        <div class="p-6 bg-gray-50 flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
+          <button class="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-100 transition-colors">Annuler</button>
+            
+          <button class="px-6 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors">Publier l'annonce</button>
+        </div>
       </div>
+
     </main>
   </div>
+
+  <script src="static/script.js"></script>
 
 </body>
 </html>
